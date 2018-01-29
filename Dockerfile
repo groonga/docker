@@ -10,7 +10,7 @@ ENV CFLAGS -g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-securit
 ENV LDFLAGS -Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now
 ENV CPPFLAGS -Wdate-time -D_FORTIFY_SOURCE=2
 ENV CXXFLAGS -g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security
-ENV VERSION 7.1.0
+ENV VERSION 7.1.1
 
 RUN curl -Lo groonga.tar.gz \
   http://packages.groonga.org/source/groonga/groonga-$VERSION.tar.gz && \
