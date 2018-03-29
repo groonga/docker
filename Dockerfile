@@ -16,8 +16,7 @@ RUN curl -Lo groonga.tar.gz \
   http://packages.groonga.org/source/groonga/groonga-$VERSION.tar.gz && \
   tar xzf groonga.tar.gz && cd groonga-$VERSION && \
   ./configure --prefix=/usr \
-    --disable-maintainer-mode --disable-dependency-tracking \
-    --disable-groonga-httpd && \
+    --disable-maintainer-mode --disable-dependency-tracking && \
   make && make install && make clean && cd .. && rm -rf groonga*
 
 ENTRYPOINT ["groonga"]
