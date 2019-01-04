@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.8
 
 RUN apk --no-cache add make g++ musl-dev curl \
   jemalloc zeromq libevent msgpack-c-dev ca-certificates && \
