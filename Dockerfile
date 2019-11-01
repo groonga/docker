@@ -18,6 +18,9 @@ RUN curl -Lo groonga.tar.gz \
   ./configure --prefix=/usr \
     --disable-maintainer-mode --disable-dependency-tracking \
     --disable-groonga-httpd && \
-  make && make install && make clean && cd .. && rm -rf groonga*
+  make && make DESTDIR=/chroot install
 
+FROM alpine:3.8
+RUN apk --no-cache add jemalloc zeromq libevent msgpack-c
+COPY --from=0 /chroot/ /
 ENTRYPOINT ["groonga"]
