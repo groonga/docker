@@ -1,9 +1,201 @@
-# About this Repo
+# Dockerfile for Groonga
 
-This is the Git repo of the Docker image for groonga.
+Dockerfile for [Groonga](https://groonga.org/) full text search engine.
+
+## Supported tags and respective Dockerfile links
+
+| Groonga | Distribution     | Tags                                 | Path                               |
+| ------- | ---------------- | ------------------------------------ | ---------------------------------- |
+| 10.0.6  | Debian GNU/Linux | 10.0.6-debian, latest-debian, latest | [debian/Dockerfile][10.0.6-debian] |
+| 10.0.6  | Alpine Linux     | 10.0.6-alpine, latest-alpine         | [alpine/Dockerfile][10.0.6-alpine] |
 
 ## Usage
 
-```bash
-$ docker run -it groonga/groonga
+There are Debian GNU/Linux based images and Alpine Linux based
+images. Debian GNU/Linux images are recommended for normal use. They
+start Groonga as an HTTP server by default.. Alpine Linux based images
+are for advanced users.
+
+Debian GNU/Linux based images start Groonga as an HTTP server by default:
+
+```console
+$ docker run -d --rm --publish=10041:10041 groonga/groonga:latest-debian
 ```
+
+You can use it via http://127.0.0.1:10041/ .
+
+Alpine Linux based images run `groonga` command without any
+argument:
+
+```console
+$ docker run -it --rm groonga/groonga:latest-alpine
+> status
+[[0,1599459609.325239,8.893013000488281e-05],{"alloc_count":320,...}]
+> quit
+[[0,1599459638.74908,3.409385681152344e-05],true]
+$
+```
+
+You can run Groonga as an HTTP server with some options:
+
+```console
+$ mkdir -p db
+$ docker run \
+    -d \
+    --rm \
+    --publish=10041:10041 \
+    --volume=$PWD/db:/var/lib/db \
+    groonga/groonga:latest-alpine \
+    --protocol http \
+    -s \
+    -n \
+    /var/lib/db/db
+```
+
+You can use it via http://127.0.0.1:10041/ .
+
+## Customization
+
+You can custom behaviors of Debian GNU/Linux based images by the
+following environment variables:
+
+### `GROONGA_ARGS`
+
+You can pass additional command line arguments to `groonga`.
+
+Here is an example to disable cache by passing `--cache-limit=0`
+command line argument:
+
+```bash
+docker run \
+  -d \
+  --rm \
+  --publish=10041:10041 \
+  --env=GROONGA_ARGS="--cache-limit=0" \
+  groonga/groonga:latest-debian
+```
+
+### `GROONGA_CACHE_DIR`
+
+The path of the cache directory.
+
+The default is empty. The empty value means that Groonga doesn't use
+persistent cache.
+
+See also: [`--cache-base-path`](https://groonga.org/docs/reference/executables/groonga.html#cmdoption-groonga-cache-base-path)
+
+Here is an example to use persistent cache:
+
+```bash
+mkdir -p cache
+docker run \
+  -d \
+  --rm \
+  --publish=10041:10041 \
+  --volume=${PWD}/cache:/var/cache/groonga \
+  --env=GROONGA_CACHE_DIR="/var/cache/groonga" \
+  groonga/groonga:latest-debian
+```
+
+### `GROONGA_DB`
+
+The path of the Groonga database.
+
+The default is `/var/lib/groonga/db/db`.
+
+You can use storage in host by just mounting a storage in host to
+`/var/lib/groonga/db`:
+
+```bash
+mkdir -p db
+docker run \
+  -d \
+  --rm \
+  --publish=10041:10041 \
+  --volume=${PWD}/db:/var/lib/groonga/db \
+  groonga/groonga:latest-debian
+```
+
+You can also change the database path:
+
+```bash
+mkdir -p db
+docker run \
+  -d \
+  --rm \
+  --publish=10041:10041 \
+  --volume=${PWD}:/host \
+  --env=GROONGA_DB=/host/db/db \
+  groonga/groonga:latest-debian
+```
+
+### `GROONGA_LOG_DIR`
+
+The path of the directory to store log files.
+
+The default is `/var/log/groonga`.
+
+You can use storage in host by just mounting a storage in host to
+`/var/log/groonga`:
+
+```bash
+mkdir -p log
+docker run \
+  -d \
+  --rm \
+  --publish=10041:10041 \
+  --volume=${PWD}/log:/var/log/groonga \
+  groonga/groonga:latest-debian
+```
+
+You can also change the database path:
+
+```bash
+mkdir -p log
+docker run \
+  -d \
+  --rm \
+  --publish=10041:10041 \
+  --volume=${PWD}:/host \
+  --env=GROONGA_LOG_DIR=/host/log \
+  groonga/groonga:latest-debian
+```
+
+### `GROONGA_LOG_LEVEL`
+
+The log level.
+
+The default is empty. The empty value means that the Groonga's default
+log level (`notice`) is used.
+
+Here is an example to use `debug` log level:
+
+```bash
+mkdir -p log
+docker run \
+  -d \
+  --rm \
+  --publish=10041:10041 \
+  --env=GROONGA_LOG_LEVEL=debug \
+  groonga/groonga:latest-debian
+```
+
+### `GROONGA_PROTOCOL`
+
+The protocol that uses Groonga server.
+
+The default is `http`. You can use `http`, `gqtp` or `memcached`.
+
+Here is an example to use `gqtp` protocol:
+
+```bash
+docker run \
+  -d \
+  --rm \
+  --publish=10043:10043 \
+  --env=GROONGA_PROTOCOL=10043 \
+  groonga/groonga:latest-debian
+```
+
+[10.0.6-debian]: https://github.com/ggroonga/docker/tree/10.0.6-debian/Dockerfile
+[10.0.6-alpine]: https://github.com/ggroonga/docker/tree/10.0.6-alpine/Dockerfile

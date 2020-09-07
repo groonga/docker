@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.12
 
 RUN apk --no-cache add make g++ musl-dev curl \
   jemalloc zeromq libevent msgpack-c-dev ca-certificates && \
@@ -10,17 +10,21 @@ ENV CFLAGS -g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-securit
 ENV LDFLAGS -Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now
 ENV CPPFLAGS -Wdate-time -D_FORTIFY_SOURCE=2
 ENV CXXFLAGS -g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security
-ENV VERSION 8.1.0
+ENV GROONGA_VERSION=10.0.5
 
-RUN curl -Lo groonga.tar.gz \
-  http://packages.groonga.org/source/groonga/groonga-$VERSION.tar.gz && \
-  tar xzf groonga.tar.gz && cd groonga-$VERSION && \
-  ./configure --prefix=/usr \
+RUN \
+  curl -Lo groonga.tar.gz \
+    https://packages.groonga.org/source/groonga/groonga-$GROONGA_VERSION.tar.gz && \
+  tar xzf groonga.tar.gz && \
+  cd groonga-$GROONGA_VERSION && \
+  ./configure \
+    --prefix=/usr \
     --disable-maintainer-mode --disable-dependency-tracking \
     --disable-groonga-httpd && \
-  make && make DESTDIR=/chroot install
+  make -j$(nproc) && \
+  make DESTDIR=/chroot install
 
-FROM alpine:3.8
+FROM alpine:3.12
 RUN apk --no-cache add jemalloc zeromq libevent msgpack-c
 COPY --from=0 /chroot/ /
 ENTRYPOINT ["groonga"]
