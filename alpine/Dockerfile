@@ -1,7 +1,14 @@
 FROM alpine:3.12
 
-RUN apk --no-cache add make g++ musl-dev curl \
-  jemalloc zeromq libevent msgpack-c-dev ca-certificates && \
+RUN apk --no-cache add \
+  ca-certificates \
+  curl \
+  g++ \
+  libevent \
+  make \
+  msgpack-c-dev \
+  musl-dev \
+  zeromq && \
   update-ca-certificates
 
 WORKDIR /usr/local/src
@@ -18,13 +25,14 @@ RUN \
   tar xzf groonga.tar.gz && \
   cd groonga-$GROONGA_VERSION && \
   ./configure \
-    --prefix=/usr \
-    --disable-maintainer-mode --disable-dependency-tracking \
-    --disable-groonga-httpd && \
+    --disable-dependency-tracking \
+    --disable-groonga-httpd \
+    --disable-maintainer-mode \
+    --prefix=/usr && \
   make -j$(nproc) && \
   make DESTDIR=/chroot install
 
 FROM alpine:3.12
-RUN apk --no-cache add jemalloc zeromq libevent msgpack-c
+RUN apk --no-cache add zeromq libevent msgpack-c
 COPY --from=0 /chroot/ /
 ENTRYPOINT ["groonga"]
