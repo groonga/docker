@@ -8,6 +8,20 @@ Dockerfile for [Groonga](https://groonga.org/) full text search engine.
 | ------- | ---------------- | ------------------------------------ | ---------------------------------- |
 | 10.0.6  | Debian GNU/Linux | 10.0.6-debian, latest-debian, latest | [debian/Dockerfile][10.0.6-debian] |
 | 10.0.6  | Alpine Linux     | 10.0.6-alpine, latest-alpine         | [alpine/Dockerfile][10.0.6-alpine] |
+| 8.0.3   | Alpine Linux     | 8.0.3                                |                                    |
+| 8.0.0   | Alpine Linux     | 8.0.0                                |                                    |
+| 7.1.1   | Alpine Linux     | 7.1.1                                |                                    |
+| 7.1.0   | Alpine Linux     | 7.1.0                                |                                    |
+| 7.0.9   | Alpine Linux     | 7.0.9                                |                                    |
+| 7.0.8   | Alpine Linux     | 7.0.8                                |                                    |
+| 7.0.7   | Alpine Linux     | 7.0.7                                |                                    |
+| 7.0.6   | Alpine Linux     | 7.0.6                                |                                    |
+| 7.0.5   | Alpine Linux     | 7.0.5                                |                                    |
+| 7.0.4   | Alpine Linux     | 7.0.4                                |                                    |
+| 7.0.3   | Alpine Linux     | 7.0.3                                |                                    |
+| 7.0.2   | Alpine Linux     | 7.0.2                                |                                    |
+| 7.0.1   | Alpine Linux     | 7.0.1                                |                                    |
+| 7.0.0   | Alpine Linux     | 7.0.0                                |                                    |
 
 ## Usage
 
