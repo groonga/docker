@@ -10,7 +10,7 @@ ENV CFLAGS -g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-securit
 ENV LDFLAGS -Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now
 ENV CPPFLAGS -Wdate-time -D_FORTIFY_SOURCE=2
 ENV CXXFLAGS -g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security
-ENV GROONGA_VERSION=10.0.5
+ENV GROONGA_VERSION=10.0.6
 
 RUN \
   curl -Lo groonga.tar.gz \
