@@ -7,6 +7,7 @@ set -u
 : ${GROONGA_ARGS:=}
 : ${GROONGA_CACHE_DIR:=}
 : ${GROONGA_DB:=/var/lib/groonga/db/db}
+: ${GROONGA_INITIALIZE_DIR:=/var/lib/groonga/initialize}
 : ${GROONGA_LOG_DIR:=/var/log/groonga}
 : ${GROONGA_LOG_LEVEL:=}
 : ${GROONGA_PROTOCOL:=http}
@@ -59,6 +60,26 @@ GROONGA_COMMAND_LINE+=(--query-log-path "${GROONGA_LOG_DIR}/query.log")
 cd ~groonga
 if [ ! -e "${GROONGA_DB}" ]; then
   "${GROONGA_COMMAND_LINE[@]}" ${GROONGA_ARGS} -n "${GROONGA_DB}" shutdown
+  if [ -d "${GROONGA_INITIALIZE_DIR}" ]; then
+    find "${GROONGA_INITIALIZE_DIR}" -print0 | \
+      sort --zero-terminated | \
+      while read -d "$(echo -n -e '\x00')" path; do
+        case "${path}" in
+          *.gz)
+            zcat "${path}" | \
+              "${GROONGA_COMMAND_LINE[@]}" ${GROONGA_ARGS} "${GROONGA_DB}"
+            ;;
+          *.zst)
+            zstdcat "${path}" | \
+              "${GROONGA_COMMAND_LINE[@]}" ${GROONGA_ARGS} "${GROONGA_DB}"
+            ;;
+          *)
+          cat "${path}" | \
+            "${GROONGA_COMMAND_LINE[@]}" ${GROONGA_ARGS} "${GROONGA_DB}"
+          ;;
+        esac
+      done
+  fi
 fi
 
 set +e
