@@ -7,6 +7,7 @@ RUN \
   apt install -y wget && \
   wget https://packages.groonga.org/debian/groonga-apt-source-latest-buster.deb && \
   apt install -y -V ./groonga-apt-source-latest-buster.deb && \
+  rm -f groonga-apt-source-latest-buster.deb && \
   apt update && \
   apt install -y \
     groonga-bin=${GROONGA_VERSION} \
