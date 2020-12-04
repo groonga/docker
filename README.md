@@ -145,6 +145,73 @@ docker run \
   groonga/groonga:latest-debian
 ```
 
+### `GROONGA_INITIALIZE_DIR`
+
+The directory that has data to initialize a newly created Groonga
+database.
+
+Note that the default Groonga database specified by `GROONGA_DB`
+already exists. If you want to use `GROONGA_INITIALIZE_DIR`, you need
+to use change `GROONGA_DB` or attach a volume to
+`/var/lib/groonga/db`.
+
+The default is `/var/lib/groonga/initialize`.
+
+The files in `GROONGA_INITIALIZE_DIR` are sorted and passed to Groonga
+one by one.
+
+Here is an example files:
+
+```text
+.
+|-- 0schema
+|   |-- 0.grn.zst
+|   `-- 1.grn
+`-- 1data
+    `-- 0-diaries.grn
+```
+
+In this case, the following order is used:
+
+  1. `0schema/0.grn.zst`
+  2. `0schema/1.grn`
+  3. `1data/0-diaries.grn`
+
+You can use compressed files. Here are supported suffixes:
+
+  * `.gz`: Uncompressed by `zcat`.
+  * `.zst`: Uncompressed by `zstdcat`.
+
+You can use storage in host by just mounting a storage in host to
+`/var/lib/groonga/initialize`. Note that you must change `GROONGA_DB`
+(or mount an empty directory as `/var/lib/groonga/db`) to create a new
+database:
+
+```bash
+mkdir -p db
+docker run \
+  -d \
+  --rm \
+  --publish=10041:10041 \
+  --volume=${PWD}/initialize:/var/lib/groonga/initialize \
+  --env=GROONGA_DB=/tmp/db/db \
+  groonga/groonga:latest-debian
+```
+
+You can also change the data directory:
+
+```bash
+mkdir -p db
+docker run \
+  -d \
+  --rm \
+  --publish=10041:10041 \
+  --volume=${PWD}:/host \
+  --env=GROONGA_INITIALIZE_DIR=/host/initialize \
+  --env=GROONGA_DB=/tmp/db/db \
+  groonga/groonga:latest-debian
+```
+
 ### `GROONGA_LOG_DIR`
 
 The path of the directory to store log files.
