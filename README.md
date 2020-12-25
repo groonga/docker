@@ -6,8 +6,10 @@ Dockerfile for [Groonga](https://groonga.org/) full text search engine.
 
 | Groonga | Distribution     | Tags                                 | Path                               |
 | ------- | ---------------- | ------------------------------------ | ---------------------------------- |
-| 10.0.9  | Debian GNU/Linux | 10.0.9-debian, latest-debian, latest | [debian/Dockerfile][10.0.9-debian] |
-| 10.0.9  | Alpine Linux     | 10.0.9-alpine, latest-alpine         | [alpine/Dockerfile][10.0.9-alpine] |
+| 10.1.0  | Debian GNU/Linux | 10.1.0-debian, latest-debian, latest | [debian/Dockerfile][10.1.0-debian] |
+| 10.1.0  | Alpine Linux     | 10.1.0-alpine, latest-alpine         | [alpine/Dockerfile][10.1.0-alpine] |
+| 10.0.9  | Debian GNU/Linux | 10.0.9-debian                        | [debian/Dockerfile][10.0.9-debian] |
+| 10.0.9  | Alpine Linux     | 10.0.9-alpine                        | [alpine/Dockerfile][10.0.9-alpine] |
 | 10.0.8  | Debian GNU/Linux | 10.0.8-debian                        | [debian/Dockerfile][10.0.8-debian] |
 | 10.0.8  | Alpine Linux     | 10.0.8-alpine                        | [alpine/Dockerfile][10.0.8-alpine] |
 | 10.0.6  | Debian GNU/Linux | 10.0.6-debian                        | [debian/Dockerfile][10.0.6-debian] |
@@ -282,6 +284,8 @@ docker run \
   groonga/groonga:latest-debian
 ```
 
+[10.1.0-debian]: https://github.com/ggroonga/docker/tree/10.1.0-debian/Dockerfile
+[10.1.0-alpine]: https://github.com/ggroonga/docker/tree/10.1.0-alpine/Dockerfile
 [10.0.9-debian]: https://github.com/ggroonga/docker/tree/10.0.9-debian/Dockerfile
 [10.0.9-alpine]: https://github.com/ggroonga/docker/tree/10.0.9-alpine/Dockerfile
 [10.0.8-debian]: https://github.com/ggroonga/docker/tree/10.0.8-debian/Dockerfile
