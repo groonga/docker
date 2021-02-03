@@ -284,11 +284,11 @@ docker run \
   groonga/groonga:latest-debian
 ```
 
-[10.1.0-debian]: https://github.com/ggroonga/docker/tree/10.1.0-debian/Dockerfile
-[10.1.0-alpine]: https://github.com/ggroonga/docker/tree/10.1.0-alpine/Dockerfile
-[10.0.9-debian]: https://github.com/ggroonga/docker/tree/10.0.9-debian/Dockerfile
-[10.0.9-alpine]: https://github.com/ggroonga/docker/tree/10.0.9-alpine/Dockerfile
-[10.0.8-debian]: https://github.com/ggroonga/docker/tree/10.0.8-debian/Dockerfile
-[10.0.8-alpine]: https://github.com/ggroonga/docker/tree/10.0.8-alpine/Dockerfile
-[10.0.6-debian]: https://github.com/ggroonga/docker/tree/10.0.6-debian/Dockerfile
-[10.0.6-alpine]: https://github.com/ggroonga/docker/tree/10.0.6-alpine/Dockerfile
+[10.1.0-debian]: https://github.com/groonga/docker/tree/10.1.0-debian/Dockerfile
+[10.1.0-alpine]: https://github.com/groonga/docker/tree/10.1.0-alpine/Dockerfile
+[10.0.9-debian]: https://github.com/groonga/docker/tree/10.0.9-debian/Dockerfile
+[10.0.9-alpine]: https://github.com/groonga/docker/tree/10.0.9-alpine/Dockerfile
+[10.0.8-debian]: https://github.com/groonga/docker/tree/10.0.8-debian/Dockerfile
+[10.0.8-alpine]: https://github.com/groonga/docker/tree/10.0.8-alpine/Dockerfile
+[10.0.6-debian]: https://github.com/groonga/docker/tree/10.0.6-debian/Dockerfile
+[10.0.6-alpine]: https://github.com/groonga/docker/tree/10.0.6-alpine/Dockerfile
