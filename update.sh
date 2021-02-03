@@ -25,6 +25,9 @@ for docker_file in */Dockerfile; do
   git add ${docker_file}
 done
 
+ruby "$(dirname "$0")/update-tag-list.rb" "$@"
+git add README.md
+
 message="Groonga ${groonga_version}"
 git commit -m "${message}"
 
