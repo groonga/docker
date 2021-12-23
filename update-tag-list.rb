@@ -47,7 +47,7 @@ File.readlines(readme_md_path).each do |line|
       distributions.each do |distribution|
         link = "[#{version}-#{distribution}]: "
         link << "https://github.com/groonga/docker"
-        link << "/tree/#{version}-#{distribution}/Dockerfile\n"
+        link << "/tree/#{version}/#{distribution}/Dockerfile\n"
         readme_md_content << link
       end
       link_added = true
