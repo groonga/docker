@@ -66,8 +66,9 @@ fi
 
 GROONGA_COMMAND_LINE=()
 if [ "${is_root}" = "true" ]; then
-  GROONGA_COMMAND_LINE+=(sudo -u groonga -H groonga)
+  GROONGA_COMMAND_LINE+=(sudo -u groonga -H)
 fi
+GROONGA_COMMAND_LINE+=(groonga)
 if [ -n "${GROONGA_CACHE_DIR}" ]; then
   GROONGA_COMMAND_LINE+=(--cache-base-path "${GROONGA_CACHE_DIR}/cache")
 fi
