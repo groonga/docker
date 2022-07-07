@@ -1,6 +1,6 @@
 FROM debian:buster
 
-ENV GROONGA_VERSION=12.0.4-1
+ENV GROONGA_VERSION=12.0.5-1
 
 RUN \
   apt update && \
