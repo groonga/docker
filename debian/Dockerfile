@@ -1,13 +1,13 @@
-FROM debian:buster
+FROM debian:bullseye
 
 ENV GROONGA_VERSION=12.0.5-1
 
 RUN \
   apt update && \
   apt install -y wget && \
-  wget https://packages.groonga.org/debian/groonga-apt-source-latest-buster.deb && \
-  apt install -y -V ./groonga-apt-source-latest-buster.deb && \
-  rm -f groonga-apt-source-latest-buster.deb && \
+  wget https://packages.groonga.org/debian/groonga-apt-source-latest-bullseye.deb && \
+  apt install -y -V ./groonga-apt-source-latest-bullseye.deb && \
+  rm -f groonga-apt-source-latest-bullseye.deb && \
   apt update && \
   apt install -y \
     groonga-bin=${GROONGA_VERSION} \
