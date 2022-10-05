@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-ENV GROONGA_VERSION=12.0.7-1
+ENV GROONGA_VERSION=12.0.8-1
 
 RUN \
   apt update && \
