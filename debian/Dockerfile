@@ -1,13 +1,22 @@
-FROM debian:bullseye
+FROM debian:bookworm
+
+RUN \
+  echo "debconf debconf/frontend select Noninteractive" | \
+    debconf-set-selections
 
 ENV GROONGA_VERSION=13.0.2-1
 
 RUN \
   apt update && \
-  apt install -y wget && \
-  wget https://packages.groonga.org/debian/groonga-apt-source-latest-bullseye.deb && \
-  apt install -y -V ./groonga-apt-source-latest-bullseye.deb && \
-  rm -f groonga-apt-source-latest-bullseye.deb && \
+  apt install -y -V ${quiet} \
+    ca-certificates \
+    lsb-release \
+    wget && \
+  wget https://apache.jfrog.io/artifactory/arrow/$(lsb_release --id --short | tr 'A-Z' 'a-z')/apache-arrow-apt-source-latest-$(lsb_release --codename --short).deb && \
+  apt install -y -V ${quiet} ./apache-arrow-apt-source-latest-$(lsb_release --codename --short).deb && \
+  wget https://packages.groonga.org/debian/groonga-apt-source-latest-$(lsb_release --codename --short).deb && \
+  apt install -y -V ${quiet} ./groonga-apt-source-latest-$(lsb_release --codename --short).deb && \
+  rm ./groonga-apt-source-latest-$(lsb_release --codename --short).deb && \
   apt update && \
   apt install -y \
     groonga-bin=${GROONGA_VERSION} \
