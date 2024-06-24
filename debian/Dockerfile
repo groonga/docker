@@ -20,7 +20,6 @@ RUN \
   apt update && \
   apt install -y \
     groonga-bin=${GROONGA_VERSION} \
-    groonga-doc=${GROONGA_VERSION} \
     groonga-normalizer-mysql \
     groonga-plugin-suggest=${GROONGA_VERSION} \
     groonga-server-common=${GROONGA_VERSION} \
