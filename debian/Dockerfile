@@ -4,7 +4,7 @@ RUN \
   echo "debconf debconf/frontend select Noninteractive" | \
     debconf-set-selections
 
-ENV GROONGA_VERSION=14.0.8-1
+ENV GROONGA_VERSION=14.0.9-1
 
 RUN \
   apt update && \
