@@ -26,7 +26,6 @@ RUN \
     groonga-server-common=${GROONGA_VERSION} \
     groonga-token-filter-stem=${GROONGA_VERSION} \
     groonga-tokenizer-mecab=${GROONGA_VERSION} \
-    groonga=${GROONGA_VERSION} \
     libgroonga0=${GROONGA_VERSION} \
     sudo \
     zstd \
