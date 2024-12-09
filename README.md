@@ -6,8 +6,10 @@ Dockerfile for [Groonga](https://groonga.org/) full text search engine.
 
 | Groonga | Distribution     | Tags                                 | Path                               |
 | ------- | ---------------- | ------------------------------------ | ---------------------------------- |
-| 14.1.0  | Debian GNU/Linux | 14.1.0-debian, latest-debian, latest | [debian/Dockerfile][14.1.0-debian] |
-| 14.1.0  | Debian GNU/Linux | 14.1.0-alpine, latest-alpine         | [alpine/Dockerfile][14.1.0-alpine] |
+| 14.1.1  | Debian GNU/Linux | 14.1.1-debian, latest-debian, latest | [debian/Dockerfile][14.1.1-debian] |
+| 14.1.1  | Debian GNU/Linux | 14.1.1-alpine, latest-alpine         | [alpine/Dockerfile][14.1.1-alpine] |
+| 14.1.0  | Debian GNU/Linux | 14.1.0-debian                        | [debian/Dockerfile][14.1.0-debian] |
+| 14.1.0  | Debian GNU/Linux | 14.1.0-alpine                        | [alpine/Dockerfile][14.1.0-alpine] |
 | 14.0.9  | Debian GNU/Linux | 14.0.9-debian                        | [debian/Dockerfile][14.0.9-debian] |
 | 14.0.9  | Debian GNU/Linux | 14.0.9-alpine                        | [alpine/Dockerfile][14.0.9-alpine] |
 | 14.0.8  | Debian GNU/Linux | 14.0.8-debian                        | [debian/Dockerfile][14.0.8-debian] |
@@ -368,6 +370,8 @@ docker run \
   groonga/groonga:latest-debian
 ```
 
+[14.1.1-debian]: https://github.com/groonga/docker/tree/14.1.1/debian/Dockerfile
+[14.1.1-alpine]: https://github.com/groonga/docker/tree/14.1.1/alpine/Dockerfile
 [14.1.0-debian]: https://github.com/groonga/docker/tree/14.1.0/debian/Dockerfile
 [14.1.0-alpine]: https://github.com/groonga/docker/tree/14.1.0/alpine/Dockerfile
 [14.0.9-debian]: https://github.com/groonga/docker/tree/14.0.9/debian/Dockerfile
