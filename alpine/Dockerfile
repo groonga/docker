@@ -65,6 +65,7 @@ RUN \
     libarrow \
     libedit \
     libevent \
+    libgomp \
     libstemmer \
     lz4 \
     msgpack-c \
