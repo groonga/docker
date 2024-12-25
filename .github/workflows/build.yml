@@ -31,7 +31,7 @@ jobs:
           fi
 
           need_push="no"
-          if [ "${GITHUB_EVENT_NAME}" = "push" && "${GITHUB_REPOSITORY}" = "groonga/docker" ]; then
+          if [ "${GITHUB_EVENT_NAME}" = "push" ] && [ "${GITHUB_REPOSITORY}" = "groonga/docker" ]; then
             need_push="yes"
           fi
           echo "DISTRIBUTION=${distribution}" >> ${GITHUB_ENV}
