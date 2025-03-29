@@ -58,7 +58,6 @@ jobs:
           tags: ${{ env.TAGS }}
       - name: Image info
         run: |
-<<<<<<< HEAD
           dockerfile=${{ matrix.id }}/Dockerfile
           groonga_version=$(grep -o 'GROONGA_VERSION=[0-9.]*' ${dockerfile} | \
                              cut -d: -f2 | \
@@ -78,11 +77,6 @@ jobs:
             --discussion-category Announcements \
             --notes-file release-note.md \
             --title "$(cat release-title.txt)"
-=======
-          echo "ref: ${{ github.ref }}"
-          echo "tags: ${{ env.TAGS }}"
-          echo "digest: ${{ steps.docker_build.outputs.digest }}"
       - name: Test if groonga command is executable
         run: |
           docker container run --rm --entrypoint "groonga" "${TAG}" --version
->>>>>>> 5bb1ca0 (ci: Add a test to check if groonga command is executable)
