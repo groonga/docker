@@ -20,14 +20,11 @@ jobs:
         run: |
           set -x
           distribution=${{ matrix.id }}
-          case "${{ github.ref }}" in
-            refs/tags/*)
-              version=$(echo "${{ github.ref }}" | sed -e "s,^refs/tags/,,g")
-              ;;
-            *)
-              version=latest
-              ;;
-          esac
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            version="${GITHUB_REF_NAME}"
+          else
+            version=latest
+          fi
           tags="groonga/groonga:${version}-${{ matrix.id }}"
           if [ ${{ matrix.id }} = "debian" -a "${version}" = "latest" ]; then
             tags="${tags},groonga/groonga:latest"
