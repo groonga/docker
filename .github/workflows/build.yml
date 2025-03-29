@@ -59,6 +59,22 @@ jobs:
           tags: ${{ env.TAGS }}
       - name: Image info
         run: |
-          echo "ref: ${{ github.ref }}"
-          echo "tags: ${{ env.TAGS }}"
-          echo "digest: ${{ steps.docker_build.outputs.digest }}"
+          dockerfile=${{ matrix.id }}/Dockerfile
+          groonga_version=$(grep -o 'GROONGA_VERSION=[0-9.]*' ${dockerfile} | \
+                             cut -d: -f2 | \
+                             head -n1)
+          echo "Groonga ${groonga_version}" | tee release-title.txt
+          cat <<RELEASE_NOTE | tee release-note.md
+          * Commit: https://github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_REF_NAME}
+          * Tags: ${TAGS}
+          * Digest: \`${{ steps.docker_build.outputs.digest }}\`
+          RELEASE_NOTE
+      - name: Create GitHub Release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --discussion-category Announcements \
+            --notes-file release-note.md \
+            --title "$(cat release-title.txt)"
