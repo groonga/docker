@@ -61,7 +61,7 @@ jobs:
         run: |
           dockerfile=${{ matrix.id }}/Dockerfile
           groonga_version=$(grep -o 'GROONGA_VERSION=[0-9.]*' ${dockerfile} | \
-                             cut -d: -f2 | \
+                             cut -d= -f2 | \
                              head -n1)
           echo "Groonga ${groonga_version}" | tee release-title.txt
           cat <<RELEASE_NOTE | tee release-note.md
