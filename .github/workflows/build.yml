@@ -74,10 +74,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" \
-            --discussion-category Announcements \
-            --notes-file release-note.md \
-            --title "$(cat release-title.txt)"
+          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            echo "Release page for ${GITHUB_REF_NAME} already exists."
+          else
+            gh release create "${GITHUB_REF_NAME}" \
+              --discussion-category Announcements \
+              --notes-file release-note.md \
+              --title "$(cat release-title.txt)"
+          fi
       - name: Test if groonga command is executable
         run: |
           docker container run --rm --entrypoint "groonga" "${TAG}" --version
