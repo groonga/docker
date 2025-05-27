@@ -60,8 +60,10 @@ jobs:
       - name: Image info
         run: |
           cat <<IMAGE_INFO | tee release-image-info-${{ matrix.id }}.md
-          * Tags: ${TAGS}
+          ### ${TAGS}
+
           * Digest: \`${{ steps.docker_build.outputs.digest }}\`
+
           IMAGE_INFO
       - uses: actions/upload-artifact@v4
         with:
@@ -84,11 +86,11 @@ jobs:
       - name: Prepare release note
         run: |
           echo "Groonga ${GITHUB_REF_NAME}" | tee release-title.txt
-          echo "* Commit: https://github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_REF_NAME}" |
-            tee release-note.md
-          for image_info in release-image-info/*; do
-            cat $image_info | tee -a release-note.md
-          done
+          cat <<RELEASE_NOTE | tee release-note.md
+          Commit: https://github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_REF_NAME}
+
+          $(cat release-image-info/*)
+          RELEASE_NOTE
       - name: Create GitHub Release
         if: github.ref_type == 'tag'
         env:
