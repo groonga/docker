@@ -59,29 +59,42 @@ jobs:
           tags: ${{ env.TAGS }}
       - name: Image info
         run: |
-          dockerfile=${{ matrix.id }}/Dockerfile
-          groonga_version=$(grep -o 'GROONGA_VERSION=[0-9.]*' ${dockerfile} | \
-                             cut -d= -f2 | \
-                             head -n1)
-          echo "Groonga ${groonga_version}" | tee release-title.txt
-          cat <<RELEASE_NOTE | tee release-note.md
-          * Commit: https://github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_REF_NAME}
+          cat <<IMAGE_INFO | tee release-image-info-${{ matrix.id }}.md
           * Tags: ${TAGS}
           * Digest: \`${{ steps.docker_build.outputs.digest }}\`
-          RELEASE_NOTE
+          IMAGE_INFO
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-image-info-${{ matrix.id }}
+          path: release-image-info-${{ matrix.id }}.md
+      - name: Test if groonga command is executable
+        run: |
+          docker container run --rm --entrypoint "groonga" "${TAG}" --version
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-image-info
+          pattern: release-image-info-*
+          merge-multiple: true
+      - name: Prepare release note
+        run: |
+          echo "Groonga ${GITHUB_REF_NAME}" | tee release-title.txt
+          echo "* Commit: https://github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_REF_NAME}" |
+            tee release-note.md
+          for image_info in release-image-info/*; do
+            cat $image_info | tee -a release-note.md
+          done
       - name: Create GitHub Release
         if: github.ref_type == 'tag'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
-            echo "Release page for ${GITHUB_REF_NAME} already exists."
-          else
-            gh release create "${GITHUB_REF_NAME}" \
-              --discussion-category Announcements \
-              --notes-file release-note.md \
-              --title "$(cat release-title.txt)"
-          fi
-      - name: Test if groonga command is executable
-        run: |
-          docker container run --rm --entrypoint "groonga" "${TAG}" --version
+          gh release create "${GITHUB_REF_NAME}" \
+            --discussion-category Announcements \
+            --notes-file release-note.md \
+            --title "$(cat release-title.txt)"
