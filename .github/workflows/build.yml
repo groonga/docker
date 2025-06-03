@@ -99,4 +99,5 @@ jobs:
           gh release create "${GITHUB_REF_NAME}" \
             --discussion-category Announcements \
             --notes-file release-note.md \
+            --repo groonga/docker \
             --title "$(cat release-title.txt)"
