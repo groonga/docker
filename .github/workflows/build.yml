@@ -65,7 +65,7 @@ jobs:
           * Digest: \`${{ steps.docker_build.outputs.digest }}\`
 
           IMAGE_INFO
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: release-image-info-${{ matrix.id }}
           path: release-image-info-${{ matrix.id }}.md
