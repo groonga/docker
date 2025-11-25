@@ -40,7 +40,7 @@ jobs:
           echo "TAG=${tag}" >> ${GITHUB_ENV}
           echo "TAGS=${tags}" >> ${GITHUB_ENV}
           echo "NEED_PUSH=${need_push}" >> ${GITHUB_ENV}
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: docker/login-action@v3
         if: env.NEED_PUSH == 'yes'
         with:
