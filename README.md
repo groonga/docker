@@ -6,8 +6,10 @@ Dockerfile for [Groonga](https://groonga.org/) full text search engine.
 
 | Groonga | Distribution     | Tags                                 | Path                               |
 | ------- | ---------------- | ------------------------------------ | ---------------------------------- |
-| 16.0.2  | Debian GNU/Linux | 16.0.2-debian, latest-debian, latest | [debian/Dockerfile][16.0.2-debian] |
-| 16.0.2  | Debian GNU/Linux | 16.0.2-alpine, latest-alpine         | [alpine/Dockerfile][16.0.2-alpine] |
+| 16.0.5  | Debian GNU/Linux | 16.0.5-debian, latest-debian, latest | [debian/Dockerfile][16.0.5-debian] |
+| 16.0.5  | Debian GNU/Linux | 16.0.5-alpine, latest-alpine         | [alpine/Dockerfile][16.0.5-alpine] |
+| 16.0.2  | Debian GNU/Linux | 16.0.2-debian                        | [debian/Dockerfile][16.0.2-debian] |
+| 16.0.2  | Debian GNU/Linux | 16.0.2-alpine                        | [alpine/Dockerfile][16.0.2-alpine] |
 | 16.0.1  | Debian GNU/Linux | 16.0.1-debian                        | [debian/Dockerfile][16.0.1-debian] |
 | 16.0.1  | Debian GNU/Linux | 16.0.1-alpine                        | [alpine/Dockerfile][16.0.1-alpine] |
 | 16.0.0  | Debian GNU/Linux | 16.0.0-debian                        | [debian/Dockerfile][16.0.0-debian] |
@@ -416,6 +418,8 @@ docker run \
   groonga/groonga:latest-debian
 ```
 
+[16.0.5-debian]: https://github.com/groonga/docker/tree/16.0.5/debian/Dockerfile
+[16.0.5-alpine]: https://github.com/groonga/docker/tree/16.0.5/alpine/Dockerfile
 [16.0.2-debian]: https://github.com/groonga/docker/tree/16.0.2/debian/Dockerfile
 [16.0.2-alpine]: https://github.com/groonga/docker/tree/16.0.2/alpine/Dockerfile
 [16.0.1-debian]: https://github.com/groonga/docker/tree/16.0.1/debian/Dockerfile
