@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:trixie
 
 RUN \
   echo "debconf debconf/frontend select Noninteractive" | \
