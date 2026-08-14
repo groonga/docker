@@ -38,7 +38,7 @@ RUN \
 
 WORKDIR /usr/local/src
 
-ENV GROONGA_VERSION=16.0.8
+ENV GROONGA_VERSION=16.0.9
 
 RUN \
   curl -Lo groonga.tar.gz \
