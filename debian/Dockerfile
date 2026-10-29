@@ -27,6 +27,9 @@ RUN \
     groonga-token-filter-stem=${GROONGA_VERSION} \
     groonga-tokenizer-mecab=${GROONGA_VERSION} \
     libgroonga0=${GROONGA_VERSION} \
+    # Work around Apache Arrow's missing OpenTelemetry runtime dependency.
+    # https://github.com/apache/arrow/issues/55112
+    opentelemetry-cpp \
     sudo \
     zstd \
     zutils && \
